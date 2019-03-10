@@ -1,6 +1,20 @@
 
 $Routes = New-Object System.Collections.ArrayList
 
+#Utility Function
+Function New-HashtablefromPsobjectProps {
+    param(
+        [Parameter(ValueFromPipelineByPropertyName)]
+        $Name,
+        [Parameter(ValueFromPipelineByPropertyName)]
+        $Value
+    )
+    begin { $hash = @{} }
+    process { $hash.Add($Name,$Value) }
+    end { return $hash }
+}
+
+
 Function Register-Route {
     param(
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -34,7 +48,7 @@ Function Invoke-Path{
         [string]$Path
     )
     process{
-        Write-Host "Path: $Path"
+        Write-Hgit post "Path: $Path"
         Write-Host "Resource: $Resource"
         Write-Host "PathParameters: $PathParameters"
         Write-Host "PathParameters:Type: $($PathParameters.GetType())"
@@ -43,12 +57,14 @@ Function Invoke-Path{
         # Using contains for comparison as it will capture cases when its
         #   Prepended with /
         $FoundRoute = $Routes | Where-Object { $Resource.Contains($_.Route) }
-        
+        $params = $PathParameters.psobject.Properties |
+            New-HashtablefromPsobjectProps
         Write-Host "Found Routes: $FoundRoute"
-        return & $FoundRoute.ScriptBlock @PathParameters
+        return & $FoundRoute.ScriptBlock @params
         
     }
 }
+
 
 Export-ModuleMember -Function Invoke-Path, Get-RegisteredRoutes,
     Clear-Routes, Register-Route
