@@ -35,7 +35,7 @@ Function Invoke-Path{
         Write-Host "Path: $Path"
         Write-Host "Resource: $Resource"
         Write-Host "Routes: $($Routes | out-string)"
-        $FoundRoute = $Routes | Where-Object { $_.Route -like $Resource }
+        $FoundRoute = $Routes | Where-Object { $_.Route -eq $Resource }
         Write-Host "Found Routes: $($Routes | out-string)"
         $tokens = $path -split "/"
         switch($tokens[0])
