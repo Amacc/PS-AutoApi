@@ -27,6 +27,8 @@ Function Get-RegisteredRoutes {
 Function Invoke-Path{
     param(
         [Parameter(ValueFromPipelineByPropertyName)]
+        [string]$PathParameters,
+        [Parameter(ValueFromPipelineByPropertyName)]
         [string]$Resource,
         [Parameter(ValueFromPipelineByPropertyName)]
         [string]$Path
@@ -35,16 +37,14 @@ Function Invoke-Path{
         Write-Host "Path: $Path"
         Write-Host "Resource: $Resource"
         Write-Host "Routes: $($Routes | out-string)"
-        $FoundRoute = $Routes | Where-Object { $_.Route -eq $Resource }
-        Write-Host "Found Routes: $($Routes | out-string)"
-        $tokens = $path -split "/"
-        switch($tokens[0])
-        {
-            'add' { [double]$tokens[1]  + [double]$tokens[2]}
-            'sub' { [double]$tokens[1]  - [double]$tokens[2]}
-            'mul' { [double]$tokens[1]  * [double]$tokens[2]}
-            'div' { [double]$tokens[1]  / [double]$tokens[2]}
-        }
+        
+        # Using contains for comparison as it will capture cases when its
+        #   Prepended with /
+        $FoundRoute = $Routes | Where-Object { $Resource.Contains($_.Route) }
+        
+        Write-Host "Found Routes: $FoundRoute"
+        return & $FoundRoute.ScriptBlock @PathParameters
+        
     }
 }
 
