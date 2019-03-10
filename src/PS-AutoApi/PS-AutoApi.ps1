@@ -36,6 +36,7 @@ Function Invoke-Path{
     process{
         Write-Host "Path: $Path"
         Write-Host "Resource: $Resource"
+        Write-Host "PathParameters: $PathParameters"
         Write-Host "Routes: $($Routes | out-string)"
         
         # Using contains for comparison as it will capture cases when its
@@ -43,7 +44,8 @@ Function Invoke-Path{
         $FoundRoute = $Routes | Where-Object { $Resource.Contains($_.Route) }
         
         Write-Host "Found Routes: $FoundRoute"
-        return & $FoundRoute.ScriptBlock @PathParameters
+        $params = $PathParameters | ConvertFrom-Json
+        return & $FoundRoute.ScriptBlock @params
         
     }
 }
