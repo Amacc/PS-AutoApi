@@ -11,7 +11,7 @@
 RootModule = 'PS-AutoApi.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.10'
+ModuleVersion = '1.0.11'
 
 # ID used to uniquely identify this module
 GUID = '4d9b55a5-4738-4e3c-a300-06a64d3c518e'

@@ -41,17 +41,16 @@ Function Get-RegisteredRoutes {
 Function Invoke-Path{
     param(
         [Parameter(ValueFromPipelineByPropertyName)]
-        $PathParameters,
+        [PSCustomObject] $PathParameters,
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string]$Resource,
+        [string] $Resource,
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string]$Path
+        [string] $Path
     )
     process{
         Write-Host "Path: $Path"
         Write-Host "Resource: $Resource"
         Write-Host "PathParameters: $PathParameters"
-        Write-Host "PathParameters:Type: $($PathParameters.GetType())"
         Write-Host "Routes: $($Routes | out-string)"
         
         # Using contains for comparison as it will capture cases when its
