@@ -27,7 +27,7 @@ Function Get-RegisteredRoutes {
 Function Invoke-Path{
     param(
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string]$PathParameters,
+        $PathParameters,
         [Parameter(ValueFromPipelineByPropertyName)]
         [string]$Resource,
         [Parameter(ValueFromPipelineByPropertyName)]
