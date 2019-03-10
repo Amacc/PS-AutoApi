@@ -48,7 +48,7 @@ Function Invoke-Path{
         [string]$Path
     )
     process{
-        Write-Hgit post "Path: $Path"
+        Write-Host "Path: $Path"
         Write-Host "Resource: $Resource"
         Write-Host "PathParameters: $PathParameters"
         Write-Host "PathParameters:Type: $($PathParameters.GetType())"
