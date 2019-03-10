@@ -33,7 +33,7 @@ Function Invoke-Path{
     )
     process{
         Write-Host "Path: $Path"
-        Write-Host "Resource: $Path"
+        Write-Host "Resource: $Resource"
         Write-Host "Routes: $($Routes | out-string)"
         $FoundRoute = $Routes | Where-Object { $_.Route -like $Resource }
         Write-Host "Found Routes: $($Routes | out-string)"
