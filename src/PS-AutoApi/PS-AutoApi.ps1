@@ -45,8 +45,7 @@ Function Invoke-Path{
         $FoundRoute = $Routes | Where-Object { $Resource.Contains($_.Route) }
         
         Write-Host "Found Routes: $FoundRoute"
-        $params = $PathParameters | ConvertFrom-Json
-        return & $FoundRoute.ScriptBlock @params
+        return & $FoundRoute.ScriptBlock @PathParameters
         
     }
 }
