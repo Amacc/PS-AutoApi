@@ -27,9 +27,16 @@ Function Get-RegisteredRoutes {
 Function Invoke-Path{
     param(
         [Parameter(ValueFromPipelineByPropertyName)]
+        [string]$Resource,
+        [Parameter(ValueFromPipelineByPropertyName)]
         [string]$Path
     )
     process{
+        Write-Host "Path: $Path"
+        Write-Host "Resource: $Path"
+        Write-Host "Routes: $($Routes | out-string)"
+        $FoundRoute = $Routes | Where-Object { $_.Route -like $Resource }
+        Write-Host "Found Routes: $($Routes | out-string)"
         $tokens = $path -split "/"
         switch($tokens[0])
         {
