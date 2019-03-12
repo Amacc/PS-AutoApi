@@ -70,8 +70,21 @@ Function Invoke-AutoApiPath {
         [Parameter(ValueFromPipelineByPropertyName)]
         [string] $Resource,
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string] $Path
+        [string] $Path,
+        [switch] $EnableFacebookLogin,
+        [switch] $EnableCognitonLogin
     )
+    begin{
+        if($EnableCognitonLogin){
+            Write-Host "Checking login:"
+            [PSCustomObject]@{
+                Route ="login"; Name="login";
+                ScriptBlock= {
+                    Write-Host "Hit login Callback"
+                }
+            } | Register-Path
+        }
+    }
     process{
         Write-Host "Path: $Path"
         Write-Host "Resource: $Resource"
@@ -87,7 +100,11 @@ Function Invoke-AutoApiPath {
             New-HashtablefromPsobjectProps
 
         try{
-            $invokeResult = & $FoundRoute.ScriptBlock @params
+            if($params.Count -gt 0){
+                $invokeResult = & $FoundRoute.ScriptBlock @params
+            }else {
+                $invokeResult = & $FoundRoute.ScriptBlock
+            }
             return @{
                 statusCode = 200;
                 body = $invokeResult | Out-String
@@ -104,6 +121,7 @@ Function Invoke-AutoApiPath {
         }
     }
 }
+
 
 Export-ModuleMember -Function Invoke-Path, Get-RegisteredRoutes,
     Clear-Routes, Register-Route, Invoke-AutoApiPath
