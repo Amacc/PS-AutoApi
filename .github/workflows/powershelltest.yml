@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        powershell-version: [5.1, 6, 7]
+        powershell-version: [6, 7]
 
     steps:
     # - name: Docker Checkout
