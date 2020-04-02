@@ -23,9 +23,9 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
 
-    - name: Run Tests
+    - name: Install Pester
       run: |
-        pwsh -command 'Install-Module Pester'
+        pwsh -command 'Install-Module Pester -Force'
 
     - name: Run Tests
       run: |
