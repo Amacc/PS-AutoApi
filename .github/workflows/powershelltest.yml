@@ -27,4 +27,4 @@ jobs:
 
     - name: Run Tests
       run: |
-        .\src\PS-AutoApi.test\PS-AutoApi.ps1
+        pwsh .\src\PS-AutoApi.test\PS-AutoApi.ps1
