@@ -10,23 +10,22 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
     container:
-        image: mcr.microsoft.com/powershell:${{ matrix.powershell-version }}-ubuntu-18.04
+      image: mcr.microsoft.com/powershell:${{ matrix.powershell-version }}-ubuntu-18.04
 
     strategy:
       matrix:
         powershell-version: [6.1.0, 7.0.0]
 
     steps:
-    # - name: Docker Checkout
-    #   uses: docker://mcr.microsoft.com/powershell:${{ matrix.powershell-version }}-ubuntu-18.04
 
     - name: Check out repository
       uses: actions/checkout@v2
 
-      # - name: Install dependencies
-    #   run: |
-    #     Install-Module Pester
+    - name: Run Tests
+      run: |
+        pwsh 'Install-Module Pester'
 
     - name: Run Tests
       run: |
