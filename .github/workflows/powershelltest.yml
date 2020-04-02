@@ -25,7 +25,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        pwsh 'Install-Module Pester'
+        pwsh -command 'Install-Module Pester'
 
     - name: Run Tests
       run: |
