@@ -5,7 +5,6 @@ $moduleDir= "$PSScriptRoot\..\PS-AutoApi\"
 $module="PS-AutoApi"
 
 Import-Module .\src\PS-AutoApi\PS-AutoApi.psd1
-Get-Module
 
 Describe $module {
     Context 'Module Setup' {
