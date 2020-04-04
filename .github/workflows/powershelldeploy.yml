@@ -9,9 +9,7 @@ on:
 
 jobs:
   deploy:
-
     runs-on: ubuntu-latest
-
     container:
         image: mcr.microsoft.com/powershell:${{ matrix.powershell-version }}-ubuntu-18.04
 
@@ -20,16 +18,19 @@ jobs:
         powershell-version: [7.0.0]
 
     steps:
-
     - name: Check out repository
       uses: actions/checkout@v2
 
     - name: Install Prereq
       run: |
-        pwsh -command 'invoke-restmethod https://dot.net/v1/dotnet-install.ps1 > dotnet-install.ps1; dotnet-install.ps1'
+        invoke-restmethod https://dot.net/v1/dotnet-install.ps1 > dotnet-install.ps1
+        dotnet-install.ps1
+      shell: pwsh
+
 
     - name: Build and publish
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run: |
         pwsh -command 'Publish-Module -NuGetApiKey $env:NUGET_API_KEY -Path .\src\PowershellTools\'
+      shell: pwsh
