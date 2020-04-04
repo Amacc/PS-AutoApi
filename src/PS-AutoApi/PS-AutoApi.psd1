@@ -11,7 +11,7 @@
 RootModule = 'PS-AutoApi.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.4.0'
+ModuleVersion = '2.0.0'
 
 # ID used to uniquely identify this module
 GUID = '4d9b55a5-4738-4e3c-a300-06a64d3c518e'
@@ -33,9 +33,10 @@ Description = 'powershell micro api framework'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    "Invoke-Path", "Get-RegisteredRoutes",
-
-    "Clear-Routes", "Register-Route", "Invoke-AutoApiPath",
+    "Get-RegisteredRoutes",
+    "Clear-Routes",
+    "Register-Route",
+    "Invoke-AutoApiPath",
 
     "Format-AutoApiResponse",
     "New-AutoApiServerlessFile"
@@ -48,7 +49,7 @@ CmdletsToExport = @()
 VariablesToExport = '*'
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = @()
+AliasesToExport = @("Invoke-Path")
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()
