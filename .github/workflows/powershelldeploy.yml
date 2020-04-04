@@ -1,0 +1,31 @@
+# This workflows will upload a Python Package using Twine when a release is created
+# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
+
+name: Deploy Powershell Gallery
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    container:
+        image: mcr.microsoft.com/powershell:${{ matrix.powershell-version }}-ubuntu-18.04
+
+    strategy:
+      matrix:
+        powershell-version: [7.0.0]
+
+    steps:
+
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Build and publish
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      run: |
+        pwsh -command 'Publish-Module -NuGetApiKey $env:NUGET_API_KEY -Path .\src\PowershellTools\'
