@@ -1,5 +1,6 @@
 Function Format-AutoApiResponse {
     [CmdletBinding()]param(
+        [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
         $InputObject,
         [switch] $FormatJson,
         [switch] $FormatXML,

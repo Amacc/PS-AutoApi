@@ -11,7 +11,7 @@
 RootModule = 'PS-AutoApi.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.3.0'
+ModuleVersion = '1.3.1'
 
 # ID used to uniquely identify this module
 GUID = '4d9b55a5-4738-4e3c-a300-06a64d3c518e'
@@ -33,9 +33,11 @@ Description = 'powershell micro api framework'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    "Invoke-Path", "Get-RegisteredRoutes"
+    "Invoke-Path", "Get-RegisteredRoutes",
+
     "Clear-Routes", "Register-Route", "Invoke-AutoApiPath",
 
+    #
     "Format-AutoApiResponse"
 )
 
@@ -61,13 +63,13 @@ AliasesToExport = @()
 PrivateData = @{
     PSData = @{
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @("aws", "api-gateway")
+        Tags = @("aws", "api-gateway", "lambda")
 
         # A URL to the license for this module.
         # LicenseUri = 'https://github.com/Amacc/AutoApi/blob/master/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = 'https://github.com/Amacc/AutoApi/'
+        ProjectUri = 'https://github.com/Amacc/PS-AutoApi/'
 
         # A URL to an icon representing this module.
         # IconUri = ''

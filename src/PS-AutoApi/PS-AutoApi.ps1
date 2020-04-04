@@ -39,7 +39,7 @@ Function Get-RegisteredRoutes {
 }
 
 Function Invoke-Path{ #Deprecating in the future
-    param(
+    [cmdletbinding()] param(
         [Parameter(ValueFromPipelineByPropertyName)]
         [PSCustomObject] $PathParameters,
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -48,18 +48,26 @@ Function Invoke-Path{ #Deprecating in the future
         [string] $Path
     )
     process{
-        Write-Host "Path: $Path"
-        Write-Host "Resource: $Resource"
-        Write-Host "PathParameters: $PathParameters"
-        Write-Host "Routes: $($Routes | out-string)"
+        Write-Verbose "Path: $Path"
+        Write-Verbose "Resource: $Resource"
+        Write-Verbose "PathParameters: $PathParameters"
+        Write-Verbose "Routes: $($Routes | out-string)"
 
         # Using contains for comparison as it will capture cases when its
         #   Prepended with /
         $FoundRoute = $Routes | Where-Object { $Resource.Contains($_.Route) }
-        $params = $PathParameters.psobject.Properties |
-            New-HashtablefromPsobjectProps
+
+        if($PathParameters){
+            $params = $PathParameters.psobject.Properties |
+                New-HashtablefromPsobjectProps
+        } else {$params = @{}}
+
         Write-Host "Found Routes: $FoundRoute"
-        return & $FoundRoute.ScriptBlock @params
+        if($FoundRoute){
+            return & $FoundRoute.ScriptBlock @params
+        } else {
+            return "Not Found" | Format-AutoApiResponse -StatusCode 404
+        }
     }
 }
 
