@@ -23,5 +23,5 @@ jobs:
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run: |
-        Publish-Module -NuGetApiKey $env:NUGET_API_KEY -Path .\src\PowershellTools\
+        Publish-Module -NuGetApiKey $env:NUGET_API_KEY -Path .\src\PS-AutoApi\
       shell: pwsh
