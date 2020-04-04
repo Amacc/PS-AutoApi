@@ -9,9 +9,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    container:
-        image: mcr.microsoft.com/powershell:${{ matrix.powershell-version }}-ubuntu-18.04
+    runs-on: windows-latest
 
     strategy:
       matrix:
@@ -20,13 +18,6 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
-
-    - name: Install Prereq
-      run: |
-        invoke-restmethod https://dot.net/v1/dotnet-install.ps1 > dotnet-install.ps1
-        ./dotnet-install.ps1
-      shell: pwsh
-
 
     - name: Build and publish
       env:
