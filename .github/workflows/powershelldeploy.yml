@@ -26,7 +26,7 @@ jobs:
 
     - name: Install Prereq
       run: |
-      pwsh -command 'invoke-restmethod https://dot.net/v1/dotnet-install.ps1 | iex'
+        pwsh -command 'invoke-restmethod https://dot.net/v1/dotnet-install.ps1 > dotnet-install.ps1; dotnet-install.ps1'
 
     - name: Build and publish
       env:
