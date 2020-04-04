@@ -4,7 +4,6 @@ $mocs = & "$PSScriptRoot/mocs/apigateway.ps1"
 $moduleDir= "$PSScriptRoot\..\PS-AutoApi\"
 $module="PS-AutoApi"
 
-Remove-Module PS-AutoApi -Force
 Import-Module .\src\PS-AutoApi\PS-AutoApi.psd1
 Get-Module
 
