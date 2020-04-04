@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion : "2010-09-09"
+Transform : "AWS::Serverless-2016-10-31"
+
+Resources:
+  {{ Package.name }} :
+    Type : "AWS::Serverless::Function"
+    Properties:
+      Handler: "main::main.Bootstrap::ExecuteFunction"
+      Runtime: "dotnetcore3.1"
+      CodeUri: "{{ Package.name }}.zip"
+      MemorySize: 512
+      Timeout: 30
+      Role: null
+      Policies:
+        - "AWSLambdaBasicExecutionRole"
+      Events:
+        {%- for route in Routes %}
+        {{ route.Name }}:
+          Type: Api
+          Properties:
+            Path: {{ route.Route }}
+            Method: {{ route.Method | default("GET") }}
+        {%- endfor %}
+        proxy:  # Needed for permissions workaround
+          Type: Api
+          Properties:
+            Path: "/{proxy+}"
+            Method: GET
+
+Outputs :
+  ApiURL :
+    Description : "API endpoint URL for Prod environment"
+    Value : { "Fn::Sub" : "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/" }

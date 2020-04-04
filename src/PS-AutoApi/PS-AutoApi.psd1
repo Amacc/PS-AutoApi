@@ -11,7 +11,7 @@
 RootModule = 'PS-AutoApi.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.3.1'
+ModuleVersion = '1.3.2'
 
 # ID used to uniquely identify this module
 GUID = '4d9b55a5-4738-4e3c-a300-06a64d3c518e'
@@ -37,8 +37,8 @@ FunctionsToExport = @(
 
     "Clear-Routes", "Register-Route", "Invoke-AutoApiPath",
 
-    #
-    "Format-AutoApiResponse"
+    "Format-AutoApiResponse",
+    "New-AutoApiServerlessFile"
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

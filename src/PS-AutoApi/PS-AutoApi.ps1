@@ -45,7 +45,9 @@ Function Invoke-Path{ #Deprecating in the future
         [Parameter(ValueFromPipelineByPropertyName)]
         [string] $Resource,
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string] $Path
+        [string] $Path,
+        [Parameter(ValueFromPipelineByPropertyName)]
+        [string] $HttpMethod
     )
     process{
         Write-Verbose "Path: $Path"
@@ -55,7 +57,9 @@ Function Invoke-Path{ #Deprecating in the future
 
         # Using contains for comparison as it will capture cases when its
         #   Prepended with /
-        $FoundRoute = $Routes | Where-Object { $Resource.Contains($_.Route) }
+        $FoundRoute = $Routes |
+            Where-Object { $Resource.Contains($_.Route) } |
+            Where-Object { $HttpMethod -eq $_.Method }
 
         if($PathParameters){
             $params = $PathParameters.psobject.Properties |
