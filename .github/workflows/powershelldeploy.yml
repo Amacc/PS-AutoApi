@@ -24,7 +24,7 @@ jobs:
     - name: Install Prereq
       run: |
         invoke-restmethod https://dot.net/v1/dotnet-install.ps1 > dotnet-install.ps1
-        dotnet-install.ps1
+        ./dotnet-install.ps1
       shell: pwsh
 
 
@@ -32,5 +32,5 @@ jobs:
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run: |
-        pwsh -command 'Publish-Module -NuGetApiKey $env:NUGET_API_KEY -Path .\src\PowershellTools\'
+        Publish-Module -NuGetApiKey $env:NUGET_API_KEY -Path .\src\PowershellTools\
       shell: pwsh
