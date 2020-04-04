@@ -20,7 +20,7 @@ Describe $module {
         $routes.PostHandler | Register-Route
         It "Passes Body to the Scriptblock" {
             $response = $mocs.SlackChallenge | Invoke-Path
-            $response | Should -Be $mocs.SlackChallenge.body.challenge
+            $response | Should -Be $mocs.SlackChallenge.body
         }
         Clear-Routes
     }

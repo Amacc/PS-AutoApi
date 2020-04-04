@@ -38,7 +38,7 @@
         pathParameters=$null
         stageVariables=$null
         requestContext=$null
-        body='{"token":"LPTQSprci2uRJSL82r2KTMyV","challenge":"I0ehPNmr1EGZfgBFIHEj6lhD2OksLaOyWupJfZasVCGbvKzWNM4O","type":"url_verification"}' | ConvertFrom-Json
+        body='{"token":"LPTQSprci2uRJSL82r2KTMyV","challenge":"I0ehPNmr1EGZfgBFIHEj6lhD2OksLaOyWupJfZasVCGbvKzWNM4O","type":"url_verification"}'
         isBase64Encoded=$False
     }
 }

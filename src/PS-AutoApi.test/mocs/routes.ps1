@@ -16,8 +16,8 @@ return @{
         Route ="/"
         ScriptBlock = {
             param($Body)
-            if($body.challenge){
-                return $body.challenge
+            if($body){
+                return $body
             }
             return "No Challenge"
         }
