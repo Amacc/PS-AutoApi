@@ -23,9 +23,6 @@ Function Register-Route {
         $ScriptBlock
     )
     process{
-        if($Route.StartsWith("/")) {
-            $Route = $Route.Substring(1)
-        }
         $Routes.Add($_) | Out-Null
     }
 }
