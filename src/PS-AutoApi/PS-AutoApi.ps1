@@ -66,8 +66,6 @@ Function Invoke-AutoApiPath{
         Write-Verbose "Path: $Path"
         Write-Verbose "Resource: $Resource"
 
-        # Using contains for comparison as it will capture cases when its
-        #   Prepended with /
         $FoundRoute = $Routes |
             Where-Object { $Resource -eq $_.Route } |
             Where-Object { $HttpMethod -eq $_.Method }
