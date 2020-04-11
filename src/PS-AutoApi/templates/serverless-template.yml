@@ -26,6 +26,7 @@ Resources:
           Properties:
             Path: "/{proxy+}"
             Method: GET
+{{ Extension | default("") | indent(2, True)}}
 
 Outputs :
   ApiURL :

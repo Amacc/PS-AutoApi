@@ -2,7 +2,8 @@ Function New-AutoApiServerlessFile{
     param(
         [string] $EntryPoint = "./src/main.ps1",
         $PackageManifest = $(Get-Content -raw package.json | ConvertFrom-Json),
-        $OutputFile = "build/serverless.yml"
+        $OutputFile = "build/serverless.yml",
+        $Extension = ""
     )
     Clear-Routes
     Write-Verbose "Importing Routes"
@@ -11,6 +12,7 @@ Function New-AutoApiServerlessFile{
     $templateParameters = @{
         Routes= Get-RegisteredRoutes
         Package=$PackageManifest
+        Extension=$Extension
     }
 
     $template = "$PSScriptRoot\..\templates\serverless-template.yml"
